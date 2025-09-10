@@ -17,5 +17,7 @@ A codificação foi feita no Android Studio, um IDE (Ambiente de Desenvolvimento
 
 `git status` usado para verificar o estado do repositório.
 
+´setadapter` atribui a adaptação 
+
 arrayAdapter: responsável por realizar uma ponte entre os dados, neste caso, fará com conecxão do spinner que está na in terface com a minha lista de moedas 
 (https://abhiandroid.com/ui/arrayadapter-tutorial-example.html#gsc.tab=0)
