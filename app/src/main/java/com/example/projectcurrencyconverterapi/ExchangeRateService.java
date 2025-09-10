@@ -10,13 +10,13 @@ public interface ExchangeRateService {
     /**
      * Método para obter taxas de câmbio recentes
      */
-    @GET("/vó/{apiKey}/latest/{baseCurrency}")
+    @GET("/v6/{apiKey}/latest/{baseCurrency}")
 
     Call<ExchangeRatesResponse> getExchangeRates(
 
             @Path("apiKey") String apiKey,
             // Subistitui {apiKey} na URL com valor fornecido
-            @Path("baseCurrency") String baseCurrency,
+            @Path("baseCurrency") String baseCurrency
             // Subistitui {baseCurrency} na URl com valor fornecido
     );
 }
