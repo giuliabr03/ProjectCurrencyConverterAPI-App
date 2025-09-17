@@ -60,10 +60,46 @@ package com.example.projectcurrencyconverterapi;
        //metodo para carregar taxas de câmbio da API
 
        private void carregarTaxasDeCambio(){
+           ExchangeRateService service = RetrofitClient.getInstance(); //Obtém a instância do serviço
+           Call<ExchangeRatesResponse> call = service.getExchangeRates("2adadf270c12be034c730f50", "USD"); //Faz a chamada da API
+
+           //Executa a chamada de forma assincrona faz uma chamada assincrona enviando
+           call.enqueue(new Callback<ExchangeRatesResponse>() {
+               @Override
+               public void onResponse(Call<ExchangeRatesResponse> call, Response<ExchangeRatesResponse> response) {
+                   if (response.isSuccessful() && response.body() != null){
+                       taxasDeCambio = response.body().getConversion_rates(); //armazena as taxas de câmbio
+                   }else { //exibi mensagem erro
+                       tvResultado.setText("Erro ao carregar taxas de câmbio");
+                   }
+               }
+               @Override
+               public void onFailure(Call<ExchangeRatesResponse> call, Throwable t) {
+                   tvResultado.setText("Erro na conexão");
+                   return;
+               }
+
+           });
 
        }
-       // método para converter o valor de uma moeda para outra
+       // Método para converter o valor de uma moeda para outra
 
        private void converterMoeda(){
+           String valorTexto = etValor.getText().toString(); // Obtém o valor digitado pelo usuário
+
+           // Verificar se o valor é válido
+           if(valorTexto.isEmpty()){
+               Toast.makeText(this, "Digite um valor válido", Toast.LENGTH_SHORT).show();
+               return;
+           }
+           String moedaOrigem = spinnerMoedaOrigem.getSelectedItem().toString(); // Obtém a moeda de origem
+           String moedaDestino = spinnerMoedaDestino.getSelectedItem().toString(); // Obtém a moeda de destino
+           double valor = Double.parseDouble(valorTexto);
+
+           //Verifica se as taxas de câmbio estão disponíveis
+           if(taxasDeCambio == null || taxasDeCambio.containsKey(moedaOrigem) || !taxasDeCambio.containsKey(moedaDestino)){
+               tvResultado.setText("Taxas de câmbio indisponíveis");
+               return;
+           }
        }
    }

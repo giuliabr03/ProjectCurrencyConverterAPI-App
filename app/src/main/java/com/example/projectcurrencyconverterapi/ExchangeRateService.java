@@ -2,9 +2,9 @@
 //interface qe identifica o endpoint da API que será consumida pelo retrofit
 package com.example.projectcurrencyconverterapi;
 
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
+import retrofit2.Call; // faz uma chamada
+import retrofit2.http.GET; // cria um caminho
+import retrofit2.http.Path; // define o caminho
 
 public interface ExchangeRateService {
     /**
