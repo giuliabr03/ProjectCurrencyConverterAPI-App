@@ -101,5 +101,15 @@ package com.example.projectcurrencyconverterapi;
                tvResultado.setText("Taxas de câmbio indisponíveis");
                return;
            }
+
+           // Obtém as taxas de cambio para moedas selecionadas
+           double taxaOrigem = taxasDeCambio.get(moedaOrigem);
+           double taxaDestino = taxasDeCambio.get(moedaDestino);
+
+           //Calcula o valor convertido
+           double valorConvertido = (valor / taxaOrigem) * taxaDestino;
+
+           //Exibe o resultado da conversão formatada
+           tvResultado.setText(String.format("Resultado: %.2f %s", valorConvertido, moedaDestino));
        }
    }
